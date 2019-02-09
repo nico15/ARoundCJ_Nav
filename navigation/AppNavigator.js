@@ -9,15 +9,6 @@ import LoadingScreen from "../screens/HomeScreen";
 import  Tour  from "../screens/TourScreen";
 import { LocationScreen } from "../screens/LocationScreen";
 
-class SettingsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Settings!</Text>
-      </View>
-    );
-  }
-}
 
 const HomeStack = createStackNavigator({
         Home: HomeScreen,
@@ -34,7 +25,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
 export default createBottomTabNavigator({
   Map: { screen: MapScreen,
     navigationOptions:{
-      tabBarVisible: false,
+    //  tabBarVisible: false,
       tabBarLabel: 'Map',
       tabBarIcon : ({tintColor}) =>(
         <Ionicons name="ios-map" size={24}/>

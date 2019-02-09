@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, ImageBackground, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, ImageBackground, Image, TouchableWithoutFeedback } from 'react-native';
 import { Tile, List, ListItem } from 'react-native-elements';
 
 import LocationButtons from '../components/LocationButtons';
+import GeoLocation from '../components/GeoLocation';
 
 
 export class LocationScreen extends React.Component {
@@ -12,40 +13,37 @@ export class LocationScreen extends React.Component {
           :
           {}
   }
-
-
   render() {
     console.log("Loooooooooooocation", this.props.navigation.state.params);
-    const { image, name, desc, key, index } = this.getParams();
+    const { image, name, desc, key, geolock, index } = this.getParams().location;
     console.log("LoooooooooooocationPaaaarams", this.props)
     return (
-      <ScrollView style={{ flex: 1}}>
-        <View style={{ flex: 1, justifyContent:'center', backgroundColor: '#000'}}>
+      // this.props.location.name !== undefined &&
+     <View style={{ flex: 1, backgroundColor: '#002266'}}>
+      <ScrollView >
                 <ImageBackground
                     source={image}
                     style={{width: '100%', height: 300}}
-                />
-              <View style={{ backgroundColor: '#002266'}}>
+                >
+                     <View 
+                         style={{flex: 1, flexDirection: 'row', height:30, width:30, marginLeft:20, marginTop:25 }}
+                      > 
+                        <TouchableWithoutFeedback onPress={() => this.props.navigation.goBack()}>
+                         <Image source={require('../assets/images/BackButton1.png')}/>
+                        </TouchableWithoutFeedback>
+                      </View>
+                </ImageBackground>
+
+              <View >
                 <Text style={{ color:'white', fontSize: 15, textAlign:'center' }}>{`${key}. ${name}`}</Text>
                 <Text style={{ color:'white', fontSize: 10, margin: 20 }}>{desc}</Text>
-             {/* Buttons */}
-                <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                  <View 
-                    style={{flex: 1, flexDirection: 'row',marginTop: 35}}>     
-                    <Image source={require('../assets/images/AR_View.png')} />
-                    <Image source={require('../assets/images/Directions.png')} style={{marginLeft:10}}/>
-                  </View>
-                  <TouchableHighlight onPress={() => this.props.navigation.navigate('Location', { name: 'Art Museum' })}>
-                  <Image source={require('../assets/images/NextSight.png')}   
-                      // onPress={() => { Alert.alert('You tapped the button!')}}
-                      // onPress={() => this.setState({ key: this.state.key + 1})}
-                  />
-                  </TouchableHighlight>
- 
-                </View>
+                
+                <LocationButtons index={key} locations={this.getParams().locations} navigate={this.props.navigation.navigate}/>
+
+                <GeoLocation />
               </View>
-          </View>
       </ScrollView>
+      </View>
     );
     
   }

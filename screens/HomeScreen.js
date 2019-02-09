@@ -14,7 +14,7 @@ const Tour = (props) => (
                 style={{width: '100%', height: 100}}
             >
                 <View 
-                    style={{marginLeft:20, marginTop:15, flex: 1, flexDirection: 'row'}}
+                    style={{marginLeft:20, marginTop:15, flexDirection: 'row'}}
                 >     
                     <Text style={{color:'white', fontSize: 30, marginRight:15}}>{props.name}</Text>
                     <Image source={require('../assets/images/Checkmark_Icon.png')} style={{marginTop:10}}/>
@@ -64,10 +64,3 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-    HomeContainer:{
-        backgroundColor: '#000'
-    }
-
-})

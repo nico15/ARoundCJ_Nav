@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ScrollView, Text, Image, StyleSheet, ImageBackground} from 'react-native';
+import {View, ScrollView, Text, Image, StyleSheet, ImageBackground, TouchableWithoutFeedback} from 'react-native';
 import { Tile, List, ListItem, Header } from 'react-native-elements';
 
 import { locations } from '../assets/data';
@@ -9,8 +9,11 @@ export default class Tour extends React.Component {
     //     console.log("AAAAAAAAAAAAAAAAAAA", this.props.navigation);
     // }
 
-    viewLocation = (location) => {
-        this.props.navigation.navigate('Location', location);
+    viewLocation = (location, locations) => {
+        this.props.navigation.navigate('Location', {
+            location,
+            locations
+        });
     }
 
     getParams() {
@@ -29,7 +32,15 @@ export default class Tour extends React.Component {
                 <ImageBackground
                     source={image}
                     style={{width: '100%', height: 260}}
-                />
+                >
+                    <View 
+                         style={{flex: 1, flexDirection: 'row', height:30, width:30, marginLeft:20, marginTop:25 }}
+                    > 
+                        <TouchableWithoutFeedback onPress={() => this.props.navigation.goBack()}>
+                         <Image source={require('../assets/images/BackButton1.png')}/>
+                        </TouchableWithoutFeedback>
+                    </View>
+                </ImageBackground>
                     <View style={{  backgroundColor: '#000'}}>
                         <Text style={{ color:'white', fontSize: 25}}>{name}</Text>
                         <Text style={{ color:'white', fontSize: 25}}>{desc}</Text>
@@ -39,7 +50,7 @@ export default class Tour extends React.Component {
                                     <ListItem
                                         key={location.key}
                                         title={`${index + 1}. ${location.name}`}
-                                        onPress={() => this.viewLocation(location)}                
+                                        onPress={() => this.viewLocation(location, locations[name])}                
                                     />
                                 ))
                             }
